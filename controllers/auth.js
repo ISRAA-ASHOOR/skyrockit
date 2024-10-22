@@ -2,6 +2,7 @@
 const express = require('express');
 const User = require('../models/user');
 const auth = require('../config/auth');
+const user = require('../models/user');
 
 const router = express.Router();
 
@@ -36,6 +37,7 @@ router.post('/sign-up', async (req, res) => {
   // sign person in and redirect to home page
   req.session.user = {
     username: newUser.username,
+    _id: newUser._id,
   };
 
   req.session.save(() => {
@@ -68,6 +70,7 @@ router.post('/sign-in', async (req, res) => {
   // create a session cookie
   req.session.user = {
     username: user.username,
+    _id: user._id,
   };
 
   req.session.save(() => {
